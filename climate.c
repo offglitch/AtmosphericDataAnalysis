@@ -104,7 +104,8 @@ int main(int argc, char *argv[])
         printf("Opening file: %s\n", argv[i]);
     }
 
-    /* Let's create an array to store our state data in  */
+    /* Let's create an array to store our state data in. As we know, there are
+     * 50 US states. */
     struct climate_info *states[NUM_STATES] = { NULL };
     int i;
     for (i = 1; i < argc; ++i)
@@ -137,7 +138,7 @@ void analyze_file(FILE *file, struct climate_info **states, int num_states)
     char line[line_sz];
     const char* delim = "\t";
     struct climate_info *info;
-    int flag = 0, i = 0, state_index;
+    int flag = 0, state_index;
     while (fgets(line, line_sz, file) != NULL)
     {
         /* TODO: We need to do a few things here:
@@ -257,16 +258,16 @@ void print_report(struct climate_info *states[], int num_states)
 
             printf("-- State: %s --\n", curr->code);
             
-            printf("Number of Records: %d\n", curr->num_records);
+            printf("Number of Records: %lu\n", curr->num_records);
             printf("Average Humidity: %0.1f\n", (avg_humidity) );            
             printf("Average Temperature: %0.1fF\n", (avg_temp) );
 
-            printf("Max Temperature: %0.1fF on %s", avg_humidity,  ctime(&(curr->max_timestamp)));
-            printf("Min Temperature: %0.1fF on %s", avg_temp,  ctime(&(curr->min_timestamp)) );
-            printf("Lightning Strikes: %d\n", curr->thunder);
+            printf("Max Temperature: %0.1fF on %s", avg_humidity,  ctime((const time_t *)&(curr->max_timestamp)));
+            printf("Min Temperature: %0.1fF on %s", avg_temp,  ctime((const time_t *)&(curr->min_timestamp)) );
+            printf("Lightning Strikes: %lu\n", curr->thunder);
 
-            printf("Records with Snow Cover: %d\n", curr->snow);
-            printf("Average Cloud Cover: %0.1f%\n\n", curr->cloud*1.0/curr->num_records);
+            printf("Records with Snow Cover: %lu\n", curr->snow);
+            printf("Average Cloud Cover: %0.1Lf \n\n", curr->cloud*1.0/curr->num_records);
         }
     }
 
