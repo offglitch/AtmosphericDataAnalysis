@@ -1,3 +1,8 @@
-# Project 1
+Analyzing data from the National Oceanic and Atmospheric Administration (NOAA) North American Mesoscale Forecast System to learn more about the climate in a few different states.
 
-See Project Spec here: https://www.cs.usfca.edu/~mmalensek/cs220/assignments/project-1.html
+- File I/O
+- String manipulation routines
+- Reading basic tab-delimited value (TDV) files
+- C structs
+- Dynamic memory allocation
+- Pointers
